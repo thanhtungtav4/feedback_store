@@ -16,7 +16,7 @@
                     <div class="c-review_logo">
                         <img src="/asset/images/logo.png" title="caraslens " alt="caraslens">
                     </div>
-                    <form action="/feedback" method="post">
+                    <form action="/feedback#submit" method="post">
                         {{ csrf_field() }}
                         <h3>I/ Thông tin cá nhân:</h3>
                         <div class="form-row">
@@ -69,36 +69,29 @@
                             <textarea type="text" class="form-control" id="question_03"  name="question_03" rows="4" cols="50"></textarea>
                         </div>
                         @if ($errors->any())
-                            <div class="alert alert-danger">
+                            <div>
                                 <ul>
                                     @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
+                                        <li class="alert alert-danger" role="alert">
+                                            {{ $error }}
+                                        </li>
                                     @endforeach
                                 </ul>
                             </div>
                         @endif
                         @if(session()->has('success'))
-                        <div class="hover_bkgr_fricc">
-                            <span class="helper"></span>
-                            <div>
-                                <div class="popupCloseButton">&times;</div>
-                                <p>Add any HTML content<br />{{ session()->get('success') }}</p>
-                            </div>
-                        </div>
-                            <div class="alert alert-danger">
-                                <ul>
-                                        <li>{{ session()->get('success') }}</li>
-                                </ul>
+                            <div class="alert alert-success" role="alert">
+                                <h4>Gửi Thành Công. Cảm ơn bạn đã gửi phản hồi cho Caralens</h4>
                             </div>
                         @endif
-                        <button type="submit" class="c-review_btn">Gửi</button>
+                        <button type="submit" class="c-review_btn" id="submit">Gửi</button>
                         
                     </form>
                 </div>
             </div>
         </main>
 
-        <footer>
+        <footer class="footer">
             <div class="c-footer_logo">
                 <img src="/asset/images/logo.png" title="Khảo sát khách hàng" alt="Khảo sát khách hàng">
             </div>
@@ -153,11 +146,7 @@
     <script>
         var starRatingControl = new StarRating('.question', {
         maxStars: 4
-        });
-        // var starRatingControl = new StarRating('.question_02',{
-        // maxStars: 4
-        // });
-       
+        });    
     </script>
     <script>
         var picker = new Lightpick({
